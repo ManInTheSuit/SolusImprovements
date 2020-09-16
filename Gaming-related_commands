@@ -1,0 +1,32 @@
+# Disable mouse acceleration
+gsettings set org.gnome.desktop.peripherals.mouse accel-profile flat
+
+# Enable Freesync (AMD GPUs)
+sudo nano /etc/X11/xorg.conf.d/20-amdgpu.conf
+# input this into the file:
+Section "Device"
+Identifier "AMD"
+Driver "amdgpu"
+Option "TearFree" "1"
+Option "VariableRefresh" "true"
+EndSection
+
+# Check your current CPU governor 
+cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+
+# Set your CPU governor to powersave, until reboot
+echo powersave | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+
+# Set your CPU governor to performance, until reboot
+echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+
+## For setting CPU governor at boot, read the corresponding text file
+
+# Disable GNOME tracker (may help with stuttering)
+systemctl --user mask tracker-store.service tracker-miner-fs.service tracker-miner-rss.service tracker-extract.service tracker-miner-apps.service tracker-writeback.service
+tracker reset --hard
+# reboot
+# NOTE: You might need to disable GNOME tracker in autostart
+
+# Enable GNOME tracker
+systemctl --user unmask tracker-store.service tracker-miner-fs.service tracker-miner-rss.service tracker-extract.service tracker-miner-apps.service tracker-writeback.service
