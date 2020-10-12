@@ -1,12 +1,8 @@
-#
 Be sure to boot UEFI version of Live USB.
 
-#
 Make a clean (reformatted if it existed before) EFI partition before making other partitions in GUI installer. Parameters: fat32, boot+efi (or esp) flags, 512 MB.
 
-#
 Recommended size for / partition: 30GB.
 
-#
 Create a separate /home partition.
 
