@@ -1,6 +1,10 @@
-# Disable mouse acceleration
-gsettings set org.gnome.desktop.peripherals.mouse accel-profile flat
+#################################
+# Periphery-related optimizations
+#################################
 
+###########################
+# GPU-related optimizations
+###########################
 # Enable Freesync (AMD GPUs)
 sudo nano /etc/X11/xorg.conf.d/20-amdgpu.conf
 # input this into the file:
@@ -11,6 +15,9 @@ Option "TearFree" "1"
 Option "VariableRefresh" "true"
 EndSection
 
+###########################
+# CPU-related optimizations 
+###########################
 # Check your current CPU governor 
 cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 
@@ -20,13 +27,28 @@ echo powersave | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 # Set your CPU governor to performance, until reboot
 echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 
-## For setting CPU governor at boot, read the corresponding text file
+## For setting CPU governor at boot, read the corresponding text file:
+# how_to_set_persistent_CPU_governor.txt
+
+########################
+# GNOME or GNOME-related
+########################
+# Disable mouse acceleration
+gsettings set org.gnome.desktop.peripherals.mouse accel-profile flat
 
 # Disable GNOME tracker (may help with stuttering)
 systemctl --user mask tracker-store.service tracker-miner-fs.service tracker-miner-rss.service tracker-extract.service tracker-miner-apps.service tracker-writeback.service
 tracker reset --hard
 # reboot
-# NOTE: You might need to disable GNOME tracker in autostart
+# Create an entry in ~/.config/autostart:
+nano ~/.config/autostart/disable_GNOME_tracker.desktop 
+# Contents:
+[Desktop Entry]
+Type=Application
+Name=Kill GNOME tracker
+Description=Kills GNOME tracker
+Exec=tracker daemon -k
+Name[en_GB]=Kill GNOME tracker.desktop
 
 # Enable GNOME tracker
 systemctl --user unmask tracker-store.service tracker-miner-fs.service tracker-miner-rss.service tracker-extract.service tracker-miner-apps.service tracker-writeback.service

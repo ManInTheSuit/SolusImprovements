@@ -1,0 +1,22 @@
+ # Screenshotting 
+GNOME screenshotter is buggy, use Flameshot as substitute.
+
+# Screenshotting 
+GNOME screenshotter is buggy, use Flameshot as substitute.
+ 
+# Printer setup 
+For scanning, install simple-scanner.
+
+# For printing (HP printers):
+Install hplip package. Run hp-setup, get the plugin the app wants you to do (this might take a while). Reboot, then go to printers app and add a printer there.  
+# Install Viewnior as default Photo viewer 
+Self-explanatory.
+
+# IBUS (for foreign language, Chinese in this case)
+Install libpinyin and pinyin but DO NOT add Chinese to languages when you run ibus-setup. Add chinese keyboard in Settings. 
+You'll need to make an ibus daemon, it's best explained on Arch wiki: https://wiki.archlinux.org/index.php/IBus
+NOTE: You need a font that can support Hanzi, a good one I use is Noto Sans.
+ 
+# Install dconf editor and tinker around with it 
+Dconf editor is a graphical editor for GNOME's gsettings. It might daunting at first, but go through all the folders (without changing anything until you familiarize yourself with it) and see which settings are available. There are a lot ofneat settings exposed here that you might want to change to your liking. I like to set default IBus keyboard to my own (instead of Chinese), change window size and move key modifier to Super instead of Alt etc.
+

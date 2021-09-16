@@ -1,0 +1,27 @@
+# Make sound output to speakers by default (if there some issues with auto-selecting HDMI as output)
+Set the default output sink
+
+To list the output sinks available, type the following command:
+
+$ pacmd list-sinks | grep -e 'name:' -e 'index:'
+
+  * index: 0
+	name: <alsa_output.pci-0000_04_01.0.analog-stereo>
+    index: 1
+	name: <combined>
+
+The * in front of the index indicates the current default output.
+
+To set a system wide default, add the source name in the default.pa file:
+
+/etc/pulse/default.pa
+
+...
+set-default-sink alsa_output.pci-0000_04_01.0.analog-stereo (change of course to match your settings)
+...
+
+When done then you can logout/login or restart PulseAudio manually for these changes to take effect.
+
+# Screen going to sleep after 10 minutes, even with all power/screensaver settings disabled
+xset -DPMS (disables DPMS power saving utility)
+# To persist the change on boot, put it in ~/.xprofile
